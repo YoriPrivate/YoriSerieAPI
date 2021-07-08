@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Categorie {
 	
@@ -56,7 +58,8 @@ public class Categorie {
 	@Column
 	private String nameCategorie;
 	
-	@ManyToMany(targetEntity = Serie.class, cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "categories")
+	@JsonIgnore
 	private List<Serie> series;
 
 }

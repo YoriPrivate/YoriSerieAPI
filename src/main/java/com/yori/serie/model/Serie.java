@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import lombok.Data;
+
 @Entity
 public class Serie {
 
@@ -26,27 +28,26 @@ public class Serie {
 	
 	
 //	@ManyToMany(targetEntity = Categorie.class, mappedBy = "series", cascade = CascadeType.ALL)
-//	private List<Categorie> categories;
+	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @JoinTable(name = "CATEGORIE_SERIES", joinColumns = { @JoinColumn(name = "idSerie") }, inverseJoinColumns = {
+            @JoinColumn(name = "idCategorie") })
+	private List<Categorie> categories;
 	
 	public Serie() {
 		
 	}
 	
-	public Serie(String name, int nbSaison) {
+	public Serie(String name, int nbSaison, List<Categorie> categories) {
 		this.nameSerie = name;
 		this.nbSaison = nbSaison;
-	}
-	
-	public Serie(String name, List<Categorie> categories) {
-		this.nameSerie = name;
-//		this.categories = categories;
+		this.categories = categories;
 	}
 
-	public long getid() {
+	public long getId() {
 		return id;
 	}
 
-	public void setid(long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -58,14 +59,6 @@ public class Serie {
 		this.nameSerie = nameSerie;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public int getNbSaison() {
 		return nbSaison;
 	}
@@ -74,14 +67,17 @@ public class Serie {
 		this.nbSaison = nbSaison;
 	}
 	
-	
+//	public Serie(String name, List<Categorie> categories) {
+//		this.nameSerie = name;
+////		this.categories = categories;
+//	}	
 
-//	public List<Categorie> getCategories() {
-//		return categories;
-//	}
-//
-//	public void setCategories(List<Categorie> categories) {
-//		this.categories = categories;
-//	}
+	public List<Categorie> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Categorie> categories) {
+		this.categories = categories;
+	}
 	
 }
