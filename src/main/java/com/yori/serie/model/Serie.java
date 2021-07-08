@@ -21,20 +21,25 @@ public class Serie {
 	@Column
 	private String nameSerie;
 	
-	@ManyToMany(targetEntity = Categorie.class, mappedBy = "series", cascade = CascadeType.ALL)
-	private List<Categorie> categories;
+	@Column
+	private int nbSaison;
+	
+	
+//	@ManyToMany(targetEntity = Categorie.class, mappedBy = "series", cascade = CascadeType.ALL)
+//	private List<Categorie> categories;
 	
 	public Serie() {
 		
 	}
 	
-	public Serie(String name) {
+	public Serie(String name, int nbSaison) {
 		this.nameSerie = name;
+		this.nbSaison = nbSaison;
 	}
 	
 	public Serie(String name, List<Categorie> categories) {
 		this.nameSerie = name;
-		this.categories = categories;
+//		this.categories = categories;
 	}
 
 	public long getid() {
@@ -53,12 +58,30 @@ public class Serie {
 		this.nameSerie = nameSerie;
 	}
 
-	public List<Categorie> getCategories() {
-		return categories;
+	public long getId() {
+		return id;
 	}
 
-	public void setCategories(List<Categorie> categories) {
-		this.categories = categories;
+	public void setId(long id) {
+		this.id = id;
 	}
+
+	public int getNbSaison() {
+		return nbSaison;
+	}
+
+	public void setNbSaison(int nbSaison) {
+		this.nbSaison = nbSaison;
+	}
+	
+	
+
+//	public List<Categorie> getCategories() {
+//		return categories;
+//	}
+//
+//	public void setCategories(List<Categorie> categories) {
+//		this.categories = categories;
+//	}
 	
 }
